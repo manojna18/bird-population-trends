@@ -4,7 +4,7 @@ import path from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/bird-population-trends/',
+  base: '/bird-population-trends2/',
   plugins: [svelte()],
   resolve: {
     alias: {
@@ -12,6 +12,12 @@ export default defineConfig({
       "$data": path.resolve("./src/data"),
       "$routes": path.resolve("./src/routes"),
     }
+  },
+  build: {
+    rollupOptions: {
+      input: path.resolve(__dirname, 'index.html'),
+    },
+    outDir: 'dist',
   }
 })
 
