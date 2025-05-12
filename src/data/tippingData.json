@@ -1,0 +1,450 @@
+[
+  {
+    "Species_EnglishName": "Tricolored Blackbird",
+    "Alert_Level": "Red"
+  },
+  {
+    "Species_EnglishName": "Dovekie",
+    "Alert_Level": "Orange"
+  },
+  {
+    "Species_EnglishName": "Saltmarsh Sparrow",
+    "Alert_Level": "Red"
+  },
+  {
+    "Species_EnglishName": "LeConte's Sparrow",
+    "Alert_Level": "Orange"
+  },
+  {
+    "Species_EnglishName": "Northern Pintail",
+    "Alert_Level": "Yellow"
+  },
+  {
+    "Species_EnglishName": "Mottled Duck",
+    "Alert_Level": "Red"
+  },
+  {
+    "Species_EnglishName": "Sprague's Pipit",
+    "Alert_Level": "Orange"
+  },
+  {
+    "Species_EnglishName": "Eastern Whip-poor-will",
+    "Alert_Level": "Yellow"
+  },
+  {
+    "Species_EnglishName": "Florida Scrub-Jay",
+    "Alert_Level": "Red"
+  },
+  {
+    "Species_EnglishName": "Pink-footed Shearwater",
+    "Alert_Level": "Red"
+  },
+  {
+    "Species_EnglishName": "Ruddy Turnstone",
+    "Alert_Level": "Orange"
+  },
+  {
+    "Species_EnglishName": "Sagebrush Sparrow",
+    "Alert_Level": "Yellow"
+  },
+  {
+    "Species_EnglishName": "Kittlitz's Murrelet",
+    "Alert_Level": "Red"
+  },
+  {
+    "Species_EnglishName": "Marbled Murrelet",
+    "Alert_Level": "Yellow"
+  },
+  {
+    "Species_EnglishName": "Sanderling",
+    "Alert_Level": "Orange"
+  },
+  {
+    "Species_EnglishName": "Red Knot",
+    "Alert_Level": "Orange"
+  },
+  {
+    "Species_EnglishName": "Stilt Sandpiper",
+    "Alert_Level": "Orange"
+  },
+  {
+    "Species_EnglishName": "Pectoral Sandpiper",
+    "Alert_Level": "Orange"
+  },
+  {
+    "Species_EnglishName": "Chestnut-collared Longspur",
+    "Alert_Level": "Red"
+  },
+  {
+    "Species_EnglishName": "Rock Sandpiper",
+    "Alert_Level": "Yellow"
+  },
+  {
+    "Species_EnglishName": "Semipalmated Sandpiper",
+    "Alert_Level": "Orange"
+  },
+  {
+    "Species_EnglishName": "Buff-breasted Sandpiper",
+    "Alert_Level": "Orange"
+  },
+  {
+    "Species_EnglishName": "Pyrrhuloxia",
+    "Alert_Level": "Orange"
+  },
+  {
+    "Species_EnglishName": "Bicknell's Thrush",
+    "Alert_Level": "Red"
+  },
+  {
+    "Species_EnglishName": "Baird's Sparrow",
+    "Alert_Level": "Red"
+  },
+  {
+    "Species_EnglishName": "Henslow's Sparrow",
+    "Alert_Level": "Yellow"
+  },
+  {
+    "Species_EnglishName": "Gunnison Sage-Grouse",
+    "Alert_Level": "Red"
+  },
+  {
+    "Species_EnglishName": "Greater Sage-Grouse",
+    "Alert_Level": "Red"
+  },
+  {
+    "Species_EnglishName": "Piping Plover",
+    "Alert_Level": "Orange"
+  },
+  {
+    "Species_EnglishName": "Mountain Plover",
+    "Alert_Level": "Red"
+  },
+  {
+    "Species_EnglishName": "Snowy Plover",
+    "Alert_Level": "Yellow"
+  },
+  {
+    "Species_EnglishName": "Chimney Swift",
+    "Alert_Level": "Orange"
+  },
+  {
+    "Species_EnglishName": "Wilson’s Plover",
+    "Alert_Level": "Red"
+  },
+  {
+    "Species_EnglishName": "Long-tailed Duck",
+    "Alert_Level": "Orange"
+  },
+  {
+    "Species_EnglishName": "Evening Grosbeak",
+    "Alert_Level": "Orange"
+  },
+  {
+    "Species_EnglishName": "Olive-sided Flycatcher",
+    "Alert_Level": "Yellow"
+  },
+  {
+    "Species_EnglishName": "Yellow Rail",
+    "Alert_Level": "Yellow"
+  },
+  {
+    "Species_EnglishName": "Black Swift",
+    "Alert_Level": "Orange"
+  },
+  {
+    "Species_EnglishName": "Bobolink",
+    "Alert_Level": "Orange"
+  },
+  {
+    "Species_EnglishName": "Red-cockaded Woodpecker",
+    "Alert_Level": "Yellow"
+  },
+  {
+    "Species_EnglishName": "Reddish Egret",
+    "Alert_Level": "Yellow"
+  },
+  {
+    "Species_EnglishName": "Yellow-billed Loon",
+    "Alert_Level": "Red"
+  },
+  {
+    "Species_EnglishName": "Whooping Crane",
+    "Alert_Level": "Orange"
+  },
+  {
+    "Species_EnglishName": "California Condor",
+    "Alert_Level": "Orange"
+  },
+  {
+    "Species_EnglishName": "Pinyon Jay",
+    "Alert_Level": "Yellow"
+  },
+  {
+    "Species_EnglishName": "American Oystercatcher",
+    "Alert_Level": "Yellow"
+  },
+  {
+    "Species_EnglishName": "Band-rumped Storm-Petrel",
+    "Alert_Level": "Red"
+  },
+  {
+    "Species_EnglishName": "Ashy Storm-Petrel",
+    "Alert_Level": "Red"
+  },
+  {
+    "Species_EnglishName": "Townsend's Storm-Petrel",
+    "Alert_Level": "Red"
+  },
+  {
+    "Species_EnglishName": "Wood Thrush",
+    "Alert_Level": "Yellow"
+  },
+  {
+    "Species_EnglishName": "Short-billed Gull",
+    "Alert_Level": "Orange"
+  },
+  {
+    "Species_EnglishName": "Glaucous Gull",
+    "Alert_Level": "Orange"
+  },
+  {
+    "Species_EnglishName": "Great Black-backed Gull",
+    "Alert_Level": "Orange"
+  },
+  {
+    "Species_EnglishName": "Western Gull",
+    "Alert_Level": "Orange"
+  },
+  {
+    "Species_EnglishName": "Black Rail",
+    "Alert_Level": "Red"
+  },
+  {
+    "Species_EnglishName": "Black Rosy-Finch",
+    "Alert_Level": "Yellow"
+  },
+  {
+    "Species_EnglishName": "Brown-capped Rosy-Finch",
+    "Alert_Level": "Red"
+  },
+  {
+    "Species_EnglishName": "Short-billed Dowitcher",
+    "Alert_Level": "Orange"
+  },
+  {
+    "Species_EnglishName": "Hudsonian Godwit",
+    "Alert_Level": "Red"
+  },
+  {
+    "Species_EnglishName": "Bar-tailed Godwit",
+    "Alert_Level": "Yellow"
+  },
+  {
+    "Species_EnglishName": "Long-billed Dowitcher",
+    "Alert_Level": "Orange"
+  },
+  {
+    "Species_EnglishName": "Cassia Crossbill",
+    "Alert_Level": "Red"
+  },
+  {
+    "Species_EnglishName": "Black Scoter",
+    "Alert_Level": "Yellow"
+  },
+  {
+    "Species_EnglishName": "Lewis’s Woodpecker",
+    "Alert_Level": "Yellow"
+  },
+  {
+    "Species_EnglishName": "Whimbrel",
+    "Alert_Level": "Orange"
+  },
+  {
+    "Species_EnglishName": "Bristle-thighed Curlew",
+    "Alert_Level": "Red"
+  },
+  {
+    "Species_EnglishName": "Ivory Gull",
+    "Alert_Level": "Yellow"
+  },
+  {
+    "Species_EnglishName": "Bachman's Sparrow",
+    "Alert_Level": "Red"
+  },
+  {
+    "Species_EnglishName": "Short-tailed Albatross",
+    "Alert_Level": "Yellow"
+  },
+  {
+    "Species_EnglishName": "Yellow-billed Magpie",
+    "Alert_Level": "Red"
+  },
+  {
+    "Species_EnglishName": "Eastern Towhee",
+    "Alert_Level": "Orange"
+  },
+  {
+    "Species_EnglishName": "American Golden-Plover",
+    "Alert_Level": "Orange"
+  },
+  {
+    "Species_EnglishName": "Black-bellied Plover",
+    "Alert_Level": "Orange"
+  },
+  {
+    "Species_EnglishName": "Horned Grebe",
+    "Alert_Level": "Yellow"
+  },
+  {
+    "Species_EnglishName": "Steller's Eider",
+    "Alert_Level": "Red"
+  },
+  {
+    "Species_EnglishName": "Bermuda Petrel",
+    "Alert_Level": "Red"
+  },
+  {
+    "Species_EnglishName": "Fea's Petrel",
+    "Alert_Level": "Red"
+  },
+  {
+    "Species_EnglishName": "Black-capped Petrel",
+    "Alert_Level": "Red"
+  },
+  {
+    "Species_EnglishName": "Hawaiian Petrel",
+    "Alert_Level": "Red"
+  },
+  {
+    "Species_EnglishName": "Audubon's Shearwater",
+    "Alert_Level": "Yellow"
+  },
+  {
+    "Species_EnglishName": "Manx Shearwater",
+    "Alert_Level": "Yellow"
+  },
+  {
+    "Species_EnglishName": "King Rail",
+    "Alert_Level": "Orange"
+  },
+  {
+    "Species_EnglishName": "Ridgway's Rail",
+    "Alert_Level": "Red"
+  },
+  {
+    "Species_EnglishName": "Thick-billed Longspur",
+    "Alert_Level": "Red"
+  },
+  {
+    "Species_EnglishName": "Rufous Hummingbird",
+    "Alert_Level": "Orange"
+  },
+  {
+    "Species_EnglishName": "Allen's Hummingbird",
+    "Alert_Level": "Red"
+  },
+  {
+    "Species_EnglishName": "Cerulean Warbler",
+    "Alert_Level": "Yellow"
+  },
+  {
+    "Species_EnglishName": "Golden-cheeked Warbler",
+    "Alert_Level": "Red"
+  },
+  {
+    "Species_EnglishName": "Prairie Warbler",
+    "Alert_Level": "Yellow"
+  },
+  {
+    "Species_EnglishName": "Grace's Warbler",
+    "Alert_Level": "Yellow"
+  },
+  {
+    "Species_EnglishName": "Kirtland’s Warbler",
+    "Alert_Level": "Orange"
+  },
+  {
+    "Species_EnglishName": "Spectacled Eider",
+    "Alert_Level": "Red"
+  },
+  {
+    "Species_EnglishName": "King Eider",
+    "Alert_Level": "Orange"
+  },
+  {
+    "Species_EnglishName": "Black-chinned Sparrow",
+    "Alert_Level": "Yellow"
+  },
+  {
+    "Species_EnglishName": "Field Sparrow",
+    "Alert_Level": "Yellow"
+  },
+  {
+    "Species_EnglishName": "Least Tern",
+    "Alert_Level": "Orange"
+  },
+  {
+    "Species_EnglishName": "Spotted Owl",
+    "Alert_Level": "Yellow"
+  },
+  {
+    "Species_EnglishName": "Chihuahuan Meadowlark",
+    "Alert_Level": "Yellow"
+  },
+  {
+    "Species_EnglishName": "Craveri's Murrelet",
+    "Alert_Level": "Red"
+  },
+  {
+    "Species_EnglishName": "Guadalupe Murrelet",
+    "Alert_Level": "Red"
+  },
+  {
+    "Species_EnglishName": "Scripp's Murrelet",
+    "Alert_Level": "Red"
+  },
+  {
+    "Species_EnglishName": "Bendire's Thrasher",
+    "Alert_Level": "Red"
+  },
+  {
+    "Species_EnglishName": "LeConte's Thrasher",
+    "Alert_Level": "Red"
+  },
+  {
+    "Species_EnglishName": "Lesser Yellowlegs",
+    "Alert_Level": "Orange"
+  },
+  {
+    "Species_EnglishName": "Wandering Tattler",
+    "Alert_Level": "Yellow"
+  },
+  {
+    "Species_EnglishName": "Greater Yellowlegs",
+    "Alert_Level": "Orange"
+  },
+  {
+    "Species_EnglishName": "Greater Prairie-Chicken",
+    "Alert_Level": "Red"
+  },
+  {
+    "Species_EnglishName": "Lesser Prairie-Chicken",
+    "Alert_Level": "Red"
+  },
+  {
+    "Species_EnglishName": "Pelagic Cormorant",
+    "Alert_Level": "Orange"
+  },
+  {
+    "Species_EnglishName": "Red-faced Cormorant",
+    "Alert_Level": "Red"
+  },
+  {
+    "Species_EnglishName": "Golden-winged Warbler",
+    "Alert_Level": "Yellow"
+  },
+  {
+    "Species_EnglishName": "Harris's Sparrow",
+    "Alert_Level": "Yellow"
+  }
+]
