@@ -19,14 +19,36 @@
   import bobo from "./Assets/birds/bobo.png";
   import styles from "./styles.css";
   import urgency from "./Assets/birds/urgency.png";
-  console.log(data);
+  import panel from "./Assets/birds/Birds-background.png";
+  import { onMount } from 'svelte';
 
   let groups = [];
   let years = [];
   $: selectedGroup = 'Aridland';
- 
-  $: height = 500;
-  $: width = 500;
+  
+  let chartWrapper;
+  $: width = chartWrapper?.clientWidth || 800;
+  $: height = chartWrapper?.clientHeight * 1.2|| 600;
+
+  onMount(() => {
+  console.log('onMount: chartWrapper ->', chartWrapper);
+  console.log('onMount: querySelector ->', document.querySelector('.chart-container'));
+  console.log('onMount: sizes ->', {
+    clientWidth: chartWrapper?.clientWidth,
+    clientHeight: chartWrapper?.clientHeight
+  });
+});
+
+onMount(() => {
+  const resizeObserver = new ResizeObserver(() => {
+    width = chartWrapper?.clientWidth || 800;
+  })
+  if (chartWrapper){
+    resizeObserver.observe(chartWrapper);
+    return () => resizeObserver.disconnect();
+  }
+})
+
 
   //extracting all unique groups from the data
   for (const group of data) {
@@ -53,7 +75,7 @@
 
   // Defining scales
   $: xScale = scaleLinear().domain([1970, 2022]).range([100, width - 100]);
-  $: yScale = scaleLinear().domain([minPercent, maxPercent]).range([height / 1.2, 100]);
+  $: yScale = scaleLinear().domain([minPercent, maxPercent]).range([height - 100, 100]);
 
   // Prepare data for the line generator
   $: getLineData = (selectedGroup) => {
@@ -92,7 +114,7 @@
   let xTicks = [1970, 1980, 1990, 2000, 2010, 2020];
 
   $: yTicks = (() => {
-    const tickCount = 10;
+    const tickCount = 5;
     if (!isFinite(minPercent) || !isFinite(maxPercent)) return [];
 
     let step = Math.round((maxPercent - minPercent) / (tickCount - 1)); //Calculating the interval between ticks
@@ -173,7 +195,7 @@
     } else if (selectedGroup == 'Eastern Forest'){
       return `<p>In the last 50 years, the eastern forest region has seen an over 25% decline in bird populations. This has been attributed to development and agricultural activities.</p> <p>Stabilization or modest population gains have been observed in the last decade among birds like Red-cockaded Woodpecker, Cerulean Warbler and Wood Thrush, according to NABCI.</p>`
     } else if (selectedGroup == 'Geese and Swans'){
-      return `<p>The impressive surge in geese and swan populations is mainly driven by some species like Canada Geese and Trumpter Swan.</p><p>Canada Geese numbers have exploded, driven mainly by a surge in resident geese numbers, due to their adaptation to urban landscapes.</p> <p>Concerted conservation efforts helped restore the numbers of Trumpter Swans, which once faced dangers of extinction.</p>`
+      return `<p>The impressive surge in geese and swan populations is mainly driven by some species like Canada Geese and Trumpter Swan. Canada Geese numbers have exploded, driven mainly by a surge in resident geese numbers, due to their adaptation to urban landscapes. Concerted conservation efforts helped restore the numbers of Trumpter Swans, which once faced dangers of extinction.</p>`
     } else if (selectedGroup == 'Grassland') {
       return `<p>Dramatic habitat loss and climate change driven by agriculture and development have led to a sharp decline in grassland bird populations.</p>
       <p>One in every four birds in this category has lost over 50% of its population in the last 50 years. Among these are Sprague's Pipit, Mountain Plover, and Bobolink.</p>`;
@@ -181,11 +203,9 @@
       return `<p>One in every three sea ducks is a tipping point species that has lost over 50% of its population since 1970, with projections of another 50% loss without urgent conservation efforts.</p>
       <p>This includes birds like the King Eider and Black Scoter. These birds are vulnerable to population declines due to warming waters, climate change, and habitat loss.</p>`;
     } else if (selectedGroup == 'Western Forest') {
-      return `<p>Western forest birds have lost 11% of their population over the last five decades, and species like the Rufous Hummingbird are among those at a tipping point.</p>
-      <p>Habitat disruption caused by increasingly severe wildfires and climate change has been linked to these downward trends.</p>`;
+      return `<p>Western forest birds have experienced an 11% decline in their populations over the past five decades, and species such as the Rufous Hummingbird are approaching critical tipping points. These downward trends are closely linked to habitat disruption from increasingly severe wildfires and the broader impacts of climate change, which are altering the availability and quality of the forests these birds rely on for survival.</p>`
     } else if (selectedGroup == 'Waterbirds') {
-      return `<p>The nearly 20% increase in waterbird populations is largely driven by a few species like pelicans.</p>
-      <p>However, over one-third of waterbird species are still declining due to ongoing wetland loss.</p>`;
+      return `<p>The overall waterbird population has seen a nearly 20% increase, a trend largely driven by the population growth of a few abundant species, such as pelicans. Despite this encouraging overall rise, more than one-third of waterbird species continue to experience population declines, primarily as a result of ongoing wetland loss and habitat degradation. This contrast highlights that while some species are thriving, significant conservation challenges remain for many others that depend on healthy wetland ecosystems.</p>`;
     } else {
       return `<p>A total of 112 bird species have been classified into red (42), orange (37), and yellow (33), categories based on population trend trajectories, threat severity, and the security of core breeding populations, according to the NABCI report.</p>
       <p>These birds have lost over half of their populations since 1970 and are not on a path to recovery without immediate conservation interventions. Sroll to the section below for more information.</p>`;
@@ -218,7 +238,9 @@
   <p class="subtitle">A spotlight on declining bird populations over the last 50 years</p>
   <p class="byline">by <strong>Manogna Maddipatla</strong></p>
 </div>
-
+<div class="panel-container">
+  <img src={panel} id="panel" alt="panel"/>
+</div>
 <div class="lede">
   <p>The oncoming of Spring is always an exciting time for bird watchers. Based on where you are, you might spot robins, cardinals, blue jays, and even be greeted by the distinctive honks of Canada geese calling out to their flock mid-flight. These familiar sights comfort us after a period of their stark absence in the winter. But this surface-level abundance masks a troubling truth: steep declines in bird populations are becoming more common due to habitat loss, climate change, and human activity.</p>
   <br />
@@ -240,13 +262,14 @@
 <div class="scrolly-wrapper">
   <!-- left chart (fixed) -->
   
-  <div class="sticky chart-container">
-    <svg id="canvas" transform="translate(0, {height - 500})">
+  <div class="sticky chart-container" bind:this={chartWrapper}>
+    <h2 class="group-heading">{selectedGroup}</h2>
+    <svg id="canvas" viewBox="0 0 {width} {height}" preserveAspectRatio="xMidYMid meet">
 
       <!-- Chart title -->
-      <text id="title" transform="translate(70, {height - 420})">Y/Y population change (1970 - 2022)</text>
+      <text id="title" transform="translate(120, 30)">Y/Y population change (1970 - 2022)</text>
 
-      <g id="chart-group" transform="translate(0, {height - 400})">
+      <g id="chart-group" transform="translate(0, 20)">
 
       <!-- Drawing line graphs for each group -->
       
@@ -255,7 +278,7 @@
       {/if}
       
       <!-- X axis ticks -->
-      <g class="xTicks" transform="translate(0, {height / 1.15})">
+      <g class="xTicks" transform="translate(0, {height / 1.13})">
         {#each xTicks as tick}
           <g class="tick" transform="translate({xScale(tick)}, 8)">
             <text class="tick">{tick}</text>
@@ -270,7 +293,7 @@
       <!-- Y axis ticks -->
       <g class="yTicks" transform="traslate(100, 0)">
         {#each yTicks as tick}
-          <g class="tick" transform="translate(65, {yScale(tick)})">
+          <g class="tick" transform="translate(48, {yScale(tick)})">
             <text class="tick">{tick}</text>
           </g>
         {/each}
@@ -280,11 +303,11 @@
       <line x1={100} y1={height / 1.18} x2={100} y2={30} stroke="steelblue" stroke-width="1"/>
 
       <!-- x axis label -->
-       <text x={(xScale(1970) + xScale(2022) / 3)} y={height - 25} text-anchor="middle" font-size="16" fill="steelblue">Year</text>
+       <text x={(xScale(1970) + xScale(2022) / 3)} y={height} text-anchor="middle" font-size="1.5rem" fill="steelblue">Year</text>
 
       <!-- y-axis label -->
 
-      <text x={-height / 2} y={30} transform="rotate(-90)" text-anchor="middle" font-size="16" fill="steelblue">
+      <text x={-height / 2} y={30} transform="rotate(-90)"text-anchor="middle" font-size="1.3rem" fill="steelblue">
         Percent change (%)
       </text>
   
@@ -293,7 +316,7 @@
         <text
           x={xScale(+maxPoint.Year) + 6}
           y={yScale(+maxPoint.percent) - 6}
-          font-size="12"
+          font-size="1.2rem"
           fill="black"
         >
           {(+maxPoint.percent).toFixed(1)}%
@@ -305,7 +328,7 @@
         <text
           x={xScale(+minPoint.Year) + 6}
           y={yScale(+minPoint.percent) - 6}
-          font-size="12"
+          font-size="1.2rem"
           fill="black"
         >
           {(+minPoint.percent).toFixed(1)}%
@@ -315,14 +338,13 @@
 
     </g>
     </svg>
+     <div id="img-container">
+      <img id="img" src={selectedImage(selectedGroup)} alt={selectedGroup} class={fadeClass}/>
+    </div>
   </div>
   <!-- Bird Info Section -->
   <div class="sticky info-container">
-    <div id="img-container">
-      <img id="img" src={selectedImage(selectedGroup)} alt={selectedGroup} class={fadeClass}/>
-    </div>
     <div id="info-text" class={fadeClass}>
-      <h2 class="group-heading">{selectedGroup}</h2>
       <p class="birdInfo">{@html setGroupInfo(selectedGroup)}</p>
     </div>
   </div>
@@ -366,7 +388,7 @@
 
 </div>
 
-<iframe src='https://flo.uri.sh/visualisation/22997181/embed' title='Interactive or visual content' class='flourish-embed-iframe' frameborder='0' scrolling='no' style='width:100%;height:600px;' sandbox='allow-same-origin allow-forms allow-scripts allow-downloads allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation'></iframe><div style='width:100%!;margin-top:4px!important;text-align:right!important;'><a class='flourish-credit' href='https://public.flourish.studio/visualisation/22997181/?utm_source=embed&utm_campaign=visualisation/22997181' target='_top' style='text-decoration:none!important'><img alt='Made with Flourish' src='https://public.flourish.studio/resources/made_with_flourish.svg' style='width:105px!important;height:16px!important;border:none!important;margin:0!important;'> </a></div>
+<iframe src='https://flo.uri.sh/visualisation/22997181/embed' title='Interactive or visual content' class='flourish-embed-iframe' frameborder='0' scrolling='no' style='width:100% !important;height:600px !important;' sandbox='allow-same-origin allow-forms allow-scripts allow-downloads allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation'></iframe><div style='width:100%!;margin-top:4px!important;text-align:right!important;'><a class='flourish-credit' href='https://public.flourish.studio/visualisation/22997181/?utm_source=embed&utm_campaign=visualisation/22997181' target='_top' style='text-decoration:none!important'><img alt='Made with Flourish' src='https://public.flourish.studio/resources/made_with_flourish.svg' style='width:105px!important;height:16px!important;border:none!important;margin:0!important;'> </a></div>
 
 </section>
 <section id="footer">
