@@ -88,9 +88,11 @@ line points: #chart-group
 
   #img-container {
     width: 60%;
+    height: auto;
     grid-column: 2;
     margin-top: auto;
     margin-bottom: auto;
+    aspect-ratio: 1 / 1;
   }
 
   .info-container {
