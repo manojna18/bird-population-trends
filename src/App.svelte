@@ -33,7 +33,7 @@
   
   let chartWrapper;
   $: width = Math.round(chartWrapper?.clientWidth || 800);
-  $: height = Math.round(chartWrapper?.clientHeight * 1.2|| 600);
+  $: height = Math.round(chartWrapper?.clientHeight || 600);
 
   onMount(() => {
   console.log('onMount: chartWrapper ->', chartWrapper);
@@ -313,7 +313,7 @@ onMount(() => {
   
       <!-- X axis line -->
   
-      <line x1={xScale(1970)} y1={height / 1.17} x2={xScale(2022) + 10} y2={height / 1.17} stroke="steelblue" stroke-width="1"/>
+      <line x1={xScale(1970)} y1={height / 1.2} x2={xScale(2022) + 10} y2={height / 1.2} stroke="steelblue" stroke-width="1"/>
   
       <!-- Y axis ticks -->
       <g class="yTicks" transform="traslate(100, 0)">
@@ -325,7 +325,7 @@ onMount(() => {
       </g>
   
       <!-- Y axis line -->
-      <line x1={100} y1={height / 1.17} x2={100} y2={30} stroke="steelblue" stroke-width="1"/>
+      <line x1={100} y1={height / 1.2} x2={100} y2={30} stroke="steelblue" stroke-width="1"/>
 
       <!-- x axis label -->
        <text x={(xScale(1970) + xScale(2022) / 3)} y={height} text-anchor="middle" font-size="1.5rem" fill="steelblue">Year</text>
