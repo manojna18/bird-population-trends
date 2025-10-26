@@ -20,6 +20,11 @@
   import styles from "./styles.css";
   import urgency from "./Assets/birds/urgency.png";
   import panel from "./Assets/birds/Birds-background.png";
+  import bluejay from "./Assets/birds/Bluejay.png";
+  import avocet from "./Assets/birds/avocet.png";
+  import eagle from "./Assets/birds/eagle.png";
+  import woodduck from "./Assets/birds/woodduck.png";
+  import birdcall from "./Assets/birds/eagle-call.mp3"
   import { onMount } from 'svelte';
 
   let groups = [];
@@ -27,8 +32,8 @@
   $: selectedGroup = 'Aridland';
   
   let chartWrapper;
-  $: width = chartWrapper?.clientWidth || 800;
-  $: height = chartWrapper?.clientHeight * 1.2|| 600;
+  $: width = Math.round(chartWrapper?.clientWidth || 800);
+  $: height = Math.round(chartWrapper?.clientHeight * 1.2|| 600);
 
   onMount(() => {
   console.log('onMount: chartWrapper ->', chartWrapper);
@@ -191,7 +196,7 @@ onMount(() => {
         <p>Efforts are underway to protect birds like the Greater sage-grouse, which has seen steep declines since 1970. The bird is considered a key health indicator of the sagebrush ecosystem, a biodiversity hotspot and home to about 90 bird species.</p>
       `
     } else if (selectedGroup == 'Dabbling/Diving Ducks'){
-      return `<p>While ducks and other waterbirds have shown notable population gains due to wetland conservation efforts, the numbers are showing a downward trend recently, according to the State of the Birds 2025 report.</p> <p>The report draws attention to declining duck numbers in the Prairie Pothole region of the Upper Midwest.</p> <p>This wetland region, home to over 50% of North America's migratory waterfowl, has witnessed destruction due to agricultural development and droughts.</p>`
+      return `<p>While ducks and other waterbirds have shown notable population gains due to wetland conservation efforts, the numbers are showing a downward trend recently, according to the State of the Birds 2025 report. The report draws attention to declining duck numbers in the Prairie Pothole region of the Upper Midwest. This wetland region, home to over 50% of North America's migratory waterfowl, has witnessed destruction due to agricultural development and droughts.</p>`
     } else if (selectedGroup == 'Eastern Forest'){
       return `<p>In the last 50 years, the eastern forest region has seen an over 25% decline in bird populations. This has been attributed to development and agricultural activities.</p> <p>Stabilization or modest population gains have been observed in the last decade among birds like Red-cockaded Woodpecker, Cerulean Warbler and Wood Thrush, according to NABCI.</p>`
     } else if (selectedGroup == 'Geese and Swans'){
@@ -228,7 +233,19 @@ onMount(() => {
     }
   }
 
+  // trigger sound on hover
 
+ let audio;
+
+ const playSound = () => {
+  if (audio){
+    console.log("audio ready");
+    audio.currentTime = 0; // restart if already playing
+      audio.play();
+  }
+ }
+
+ const text = `Three in four North American bird species are in decline`;
 </script>
 
 
@@ -236,10 +253,18 @@ onMount(() => {
 <div class="title-container">
   <p class="title">Bird population trends in North America</p>
   <p class="subtitle">A spotlight on declining bird populations over the last 50 years</p>
-  <p class="byline">by <strong>Manogna Maddipatla</strong></p>
+  <p class="byline">by <strong id="byline">Manogna Maddipatla</strong></p>
+  <p class="desktop-only">📱 This interactive visualization is best viewed on a larger screen for the full experience.</p>
 </div>
-<div class="panel-container">
-  <img src={panel} id="panel" alt="panel"/>
+<div class="panel-container" on:mouseenter={playSound}>
+  <div id="bird-images">
+  <img src={bluejay} id="jay" alt="bluejay" />
+  <img src={eagle} id="eagle" alt="eagle" />
+  <img src={woodduck} id="woodduck" alt="woodduck" />
+  <img src={avocet} id="avocet" alt="avocet" />
+  </div>
+  <p id="datapoint">{#each text.split('') as letter, i}<span style="animation-delay: {i * 0.05}s">{letter}</span>{/each}</p>
+  <audio bind:this={audio} src={birdcall} preload="auto"></audio>
 </div>
 <div class="lede">
   <p>The oncoming of Spring is always an exciting time for bird watchers. Based on where you are, you might spot robins, cardinals, blue jays, and even be greeted by the distinctive honks of Canada geese calling out to their flock mid-flight. These familiar sights comfort us after a period of their stark absence in the winter. But this surface-level abundance masks a troubling truth: steep declines in bird populations are becoming more common due to habitat loss, climate change, and human activity.</p>
@@ -278,7 +303,7 @@ onMount(() => {
       {/if}
       
       <!-- X axis ticks -->
-      <g class="xTicks" transform="translate(0, {height / 1.13})">
+      <g class="xTicks" transform="translate(0, {height / 1.10})">
         {#each xTicks as tick}
           <g class="tick" transform="translate({xScale(tick)}, 8)">
             <text class="tick">{tick}</text>
@@ -288,7 +313,7 @@ onMount(() => {
   
       <!-- X axis line -->
   
-      <line x1={xScale(1970)} y1={height / 1.18} x2={xScale(2022) + 10} y2={height / 1.18} stroke="steelblue" stroke-width="1"/>
+      <line x1={xScale(1970)} y1={height / 1.17} x2={xScale(2022) + 10} y2={height / 1.17} stroke="steelblue" stroke-width="1"/>
   
       <!-- Y axis ticks -->
       <g class="yTicks" transform="traslate(100, 0)">
@@ -300,7 +325,7 @@ onMount(() => {
       </g>
   
       <!-- Y axis line -->
-      <line x1={100} y1={height / 1.18} x2={100} y2={30} stroke="steelblue" stroke-width="1"/>
+      <line x1={100} y1={height / 1.17} x2={100} y2={30} stroke="steelblue" stroke-width="1"/>
 
       <!-- x axis label -->
        <text x={(xScale(1970) + xScale(2022) / 3)} y={height} text-anchor="middle" font-size="1.5rem" fill="steelblue">Year</text>
