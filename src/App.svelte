@@ -116,14 +116,36 @@
   }
   $: ghosts = history.slice(1);
 
+  const formatPercent = (value) => `${value > 0 ? '+' : ''}${Math.round(value)}%`;
+
   $: lastPoint = lineData[selectedGroup] ? lineData[selectedGroup][lineData[selectedGroup].length - 1] : null;
   $: endpointX = lastPoint ? xScale(lastPoint.x) : 0;
   $: endpointY = lastPoint ? Math.min(Math.max(yScale(lastPoint.y), MARGIN.top), height - MARGIN.bottom) : 0;
-  $: endpointLabel = lastPoint ? `${lastPoint.y > 0 ? '+' : ''}${Math.round(lastPoint.y)}%` : '';
+  $: endpointLabel = lastPoint ? formatPercent(lastPoint.y) : '';
 
-  $: ariaLabel = lastPoint
-    ? `Line chart of ${selectedGroup} population change from 1970 to 2022, a total change of ${endpointLabel}.`
-    : `Line chart of bird population change from 1970 to 2022.`;
+  // Groups whose line crosses the fixed domain (Geese and Swans, Tipping
+  // Point) exit the frame on purpose. `exit` marks where the active group
+  // first crosses the boundary, so the chevron/continuation-label mode can
+  // replace the normal endpoint annotation instead of floating it,
+  // disconnected, at the domain edge.
+  $: exit = (() => {
+    const series = lineData[selectedGroup];
+    if (!series) return null;
+    const point = series.find(d => d.y > globalMax || d.y < globalMin);
+    if (!point) return null;
+    const last = series[series.length - 1];
+    return {
+      year: point.x,
+      direction: point.y > globalMax ? 'up' : 'down',
+      finalValue: last.y
+    };
+  })();
+
+  $: ariaLabel = !lastPoint
+    ? `Line chart of bird population change from 1970 to 2022.`
+    : exit
+      ? `Line chart showing ${selectedGroup} populations ${exit.direction === 'up' ? 'rising' : 'falling'} to ${Math.abs(Math.round(exit.finalValue))} percent ${exit.finalValue >= 0 ? 'above' : 'below'} 1970 levels by 2022. The chart frame is limited to plus and minus ${globalMax} percent, and this line continues beyond the ${exit.direction === 'up' ? 'top' : 'bottom'} of the frame.`
+      : `Line chart of ${selectedGroup} population change from 1970 to 2022, a total change of ${endpointLabel}.`;
 
   let reduceMotion = false;
   onMount(() => {
@@ -291,7 +313,7 @@
               stroke={tick === 0 ? '#9DAEC4' : '#FFFFFF'}
               stroke-width="1.5"
             />
-            <text class="tick-label" x={MARGIN.left - 10} y={yScale(tick)} text-anchor="end" dominant-baseline="middle">{tick}%</text>
+            <text class="tick-label" x={MARGIN.left - 10} y={yScale(tick)} text-anchor="end" dominant-baseline="middle">{tick}%{tick === globalMax || tick === globalMin ? '+' : ''}</text>
           {/each}
 
           {#each xTicks as tick}
@@ -300,7 +322,7 @@
 
           <g clip-path="url(#plot-clip)">
             {#each ghosts as g}
-              <path d={lineGenerator(getLineData(g))} fill="none" stroke="var(--ink-soft)" stroke-width="1.5" opacity="0.4" />
+              <path d={lineGenerator(getLineData(g))} fill="none" stroke="var(--ink-soft)" stroke-width="1" opacity="0.25" />
             {/each}
 
             {#if lineData[selectedGroup]}
@@ -317,7 +339,27 @@
             {/if}
           </g>
 
-          {#if lastPoint && showEndpoint}
+          {#if lastPoint && showEndpoint && exit}
+            {@const ex = xScale(exit.year)}
+            {@const ey = exit.direction === 'up' ? yScale(globalMax) : yScale(globalMin)}
+            {@const plotWidth = width - MARGIN.left - MARGIN.right}
+            {@const inRightThird = ex > MARGIN.left + (2 / 3) * plotWidth}
+            <g transition:fade={{ duration: reduceMotion ? 0 : 300 }}>
+              <polygon
+                points={exit.direction === 'up'
+                  ? `${ex},${ey - 10} ${ex - 7},${ey + 2} ${ex + 7},${ey + 2}`
+                  : `${ex},${ey + 10} ${ex - 7},${ey - 2} ${ex + 7},${ey - 2}`}
+                fill={groupColor[selectedGroup]}
+              />
+              <text
+                x={inRightThird ? ex - 14 : ex + 14}
+                y={ey}
+                text-anchor={inRightThird ? 'end' : 'start'}
+                dominant-baseline="middle"
+                class="exit-label"
+              >continues to {formatPercent(exit.finalValue)}</text>
+            </g>
+          {:else if lastPoint && showEndpoint}
             <g transition:fade={{ duration: reduceMotion ? 0 : 300 }}>
               <circle cx={endpointX} cy={endpointY} r="5" fill="var(--accent)" />
               <text x={endpointX + 20} y={endpointY + 10} class="endpoint-label" fill="var(--accent)">{endpointLabel}</text>

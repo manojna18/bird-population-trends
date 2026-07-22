@@ -286,6 +286,13 @@ h1 {
   font-size: 30px;
 }
 
+.exit-label {
+  font-family: var(--body);
+  font-weight: 600;
+  font-size: 15px;
+  fill: var(--accent);
+}
+
 .text-panel {
   display: flex;
   flex-direction: column;
